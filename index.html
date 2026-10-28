@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceID - Reconocimiento Facial</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+
+    <!-- 1. Header con logo, menú horizontal en desktop y menú hamburguesa SVG en mobile -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo FaceID con SVG en línea -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform duration-300">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="24" fill="#F0F7FF"/>
+                        <path d="M22 36V26C22 23.7909 23.7909 22 26 22H36" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M78 36V26C78 23.7909 76.2091 22 74 22H64" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M22 64V74C22 76.2091 23.7909 78 26 78H36" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M78 64V74C78 76.2091 76.2091 78 74 78H64" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M33 39.5C33 30 67 30 67 39.5" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                        <circle cx="40" cy="45" r="4.5" fill="#2563EB"/>
+                        <circle cx="60" cy="45" r="4.5" fill="#2563EB"/>
+                        <path d="M34 58C34 66 66 66 66 58" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M42 66C42 68.5 58 68.5 58 66" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold tracking-tight text-white">Face<span class="text-blue-500">ID</span></span>
+            </a>
+
+            <!-- Navegación para escritorio (Oculto en móvil, visible en md+) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#inicio" class="text-white font-semibold hover:text-blue-400 transition-colors">Inicio</a>
+                <a href="#servicios" class="hover:text-blue-400 transition-colors">Servicios</a>
+                <a href="#contacto" class="hover:text-blue-400 transition-colors">Contacto</a>
+                <a href="#" class="hover:text-blue-400 transition-colors">Iniciar Sesión</a>
+            </nav>
+
+            <!-- Botón del menú hamburguesa (SVG puro) visible solo en móvil (md:hidden) -->
+            <div class="md:hidden flex items-center">
+                <button type="button" class="text-slate-300 hover:text-white p-2 rounded-lg focus:outline-none" aria-label="Menú Hamburguesa">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- 2. Hero sección en color oscuro (slate-950) -->
+        <section id="inicio" class="relative overflow-hidden pt-12 pb-20 lg:pt-24 lg:pb-32 bg-slate-950">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <!-- Texto alineado a la izquierda en escritorio (lg:text-left) y centrado en móvil (text-center) -->
+                    <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-medium">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Tecnología Biométrica de Última Generación
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                            Reconocimiento Facial <br class="hidden sm:inline" />
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Rápido, Seguro y Preciso</span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                            Plataforma de autenticación basada en inteligencia artificial. Protege tus accesos e identifica identidades en milisegundos con altísima precisión.
+                        </p>
+
+                        <!-- Botón "Conoce más" alineado a la izquierda en escritorio y centrado en móvil -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#servicios" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold text-base px-8 py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all duration-300 hover:shadow-blue-600/50 hover:-translate-y-0.5 text-center">
+                                Conoce más
+                            </a>
+                        </div>
+                    </div>
+
+                
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none rounded-3xl bg-slate-900 border border-slate-800 p-4 shadow-2xl shadow-blue-900/20 overflow-hidden">
+                            <div class="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden">
+                                <img src="rostro-reconocimiento.jpg" alt="Reconocimiento Facial" class="w-full h-full object-cover object-center filter brightness-90 contrast-105" />
+                                
+                                <div class="absolute inset-0 bg-blue-950/20 mix-blend-overlay"></div>
+                                
+                                <!-- Malla/Visualizador biométrico -->
+                                <div class="absolute inset-x-8 top-12 bottom-12 border-2 border-blue-400/60 rounded-2xl flex flex-col justify-between p-4 pointer-events-none">
+                                    <div class="flex justify-between">
+                                        <div class="w-4 h-4 border-t-2 border-l-2 border-blue-400"></div>
+                                        <div class="w-4 h-4 border-t-2 border-r-2 border-blue-400"></div>
+                                    </div>
+                                    <div class="w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_15px_#3b82f6]"></div>
+                                    <div class="flex justify-between">
+                                        <div class="w-4 h-4 border-b-2 border-l-2 border-blue-400"></div>
+                                        <div class="w-4 h-4 border-b-2 border-r-2 border-blue-400"></div>
+                                    </div>
+                                </div>
+
+                                <div class="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-700/80 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 font-bold">
+                                            ✓
+                                        </div>
+                                        <div>
+                                            <div class="text-xs font-semibold text-white">Identidad Verificada</div>
+                                            <div class="text-[10px] text-slate-400">ID: #8942-FC</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono font-bold text-emerald-400">99.8%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+        <section id="servicios" class="py-16 sm:py-24 bg-slate-900/50 border-y border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-blue-400">Servicios Biométricos</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Soluciones avanzadas para cada necesidad</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center p-2.5 mb-6 group-hover:bg-blue-600/20 transition-colors duration-300">
+                        
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 20C32 20 22 34 22 50C22 68 12 80 8 82" stroke="#00B4D8" stroke-width="6" stroke-linecap="round"/>
+                                <path d="M18 60C18 72 14 80 12 82" stroke="#00B4D8" stroke-width="6" stroke-linecap="round"/>
+                                <path d="M50 30C38 30 30 40 30 52C30 70 24 82 20 86" stroke="#00B4D8" stroke-width="6" stroke-linecap="round"/>
+                                <path d="M50 40C42 40 38 46 38 56C38 74 52 82 58 90" stroke="#00B4D8" stroke-width="6" stroke-linecap="round"/>
+                                <path d="M50 20C68 20 78 34 78 50C78 58 84 72 88 82" stroke="#00B4D8" stroke-width="6" stroke-linecap="round"/>
+                                <path d="M50 30C62 30 70 40 70 52C70 64 74 76 76 80" stroke="#00B4D8" stroke-width="6" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Detección Facial</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Localización rápida de rostros en imágenes y transmisiones de video en vivo, incluso en condiciones de baja iluminación.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300">
+                            Ver más &rarr;
+                        </a>
+                    </div>
+
+        
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center p-2.5 mb-6 group-hover:bg-blue-600/20 transition-colors duration-300">
+                            
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 12L85 24V48C85 70 68 88 50 94C32 88 15 70 15 48V24L50 12Z" fill="#2563EB"/>
+                                <path d="M36 50L46 60L66 38" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Seguridad Inteligente</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Comparación 1:N y 1:1 contra bases de datos masivas para validación de usuarios e imitación de identidad.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300">
+                            Ver más &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer id="contacto" class="bg-slate-900 border-t border-slate-800 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
+                
+                <div class="md:col-span-6 lg:col-span-5 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center p-1.5">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" rx="24" fill="#F0F7FF"/>
+                                <path d="M22 36V26C22 23.7909 23.7909 22 26 22H36" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                                <path d="M78 36V26C78 23.7909 76.2091 22 74 22H64" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                                <path d="M22 64V74C22 76.2091 23.7909 78 26 78H36" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                                <path d="M78 64V74C78 76.2091 76.2091 78 74 78H64" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                                <path d="M33 39.5C33 30 67 30 67 39.5" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                                <circle cx="40" cy="45" r="4.5" fill="#2563EB"/>
+                                <circle cx="60" cy="45" r="4.5" fill="#2563EB"/>
+                                <path d="M34 58C34 66 66 66 66 58" stroke="#00B4D8" stroke-width="7" stroke-linecap="round"/>
+                                <path d="M42 66C42 68.5 58 68.5 58 66" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">Face<span class="text-blue-500">ID</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 max-w-sm">
+                        Plataforma líder en reconocimiento facial biométrico. Seguridad inteligente, fluida e integrada.
+                    </p>
+                </div>
+
+                
+                <div class="md:col-span-3 lg:col-span-3 space-y-3">
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Enlaces</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#inicio" class="hover:text-blue-400 transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" class="hover:text-blue-400 transition-colors">Servicios</a></li>
+                        <li><a href="#contacto" class="hover:text-blue-400 transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+
+                
+                <div class="md:col-span-3 lg:col-span-4 space-y-3">
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Síguenos</h4>
+                    <div class="flex gap-4 pt-2">
+                    
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 transition-colors" aria-label="Facebook">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 transition-colors" aria-label="Instagram">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 transition-colors" aria-label="LinkedIn">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.762-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 transition-colors" aria-label="YouTube">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4 text-center sm:text-left">
+                <p>&copy; 2026 FaceID. Todos los derechos reservados.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-400">Privacidad</a>
+                    <a href="#" class="hover:text-slate-400">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
